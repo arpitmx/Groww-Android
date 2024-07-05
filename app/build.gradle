@@ -1,0 +1,150 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
+}
+
+android {
+    namespace 'com.alok.groww'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.alok.groww"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+
+        debug{
+            buildConfigField("String", "BASE_URL", "\"${getProps("DEBUG_BASE_URL")}\"")
+        }
+
+        release {
+
+            buildConfigField("String", "BASE_URL", "\"${getProps("RELEASE_BASE_URL")}\"")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+
+    //Gemini
+    implementation "com.google.ai.client.generativeai:generativeai:0.1.2"
+    implementation libs.androidx.fragment.ktx
+
+    //Room
+    def room_version = "2.6.0"
+
+    implementation "androidx.room:room-ktx:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    ksp "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-paging:$room_version"
+
+
+    //  Add these line in your project
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
+
+    //ViewModel
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.2'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
+
+    //Dagger Hilt
+    implementation 'com.google.dagger:hilt-android:2.48.1'
+    kapt "com.google.dagger:hilt-android-compiler:2.48.1"
+
+    implementation 'androidx.hilt:hilt-common:1.1.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
+
+    //Timber
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+
+    //Bottom Navigation
+    def navigation_version = "2.6.0"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
+    //Circle image view
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //bottomsheet
+    implementation 'com.google.android.material:material:1.10.0'
+
+    //Glide and Pager2
+    def glide_version = "4.13.2"
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    implementation "com.github.bumptech.glide:okhttp3-integration:$glide_version"
+
+
+    //Utils library
+    implementation "com.github.Shouheng88:utils-core:2.6.0"
+
+
+    //Circular ImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //Lottie Animations
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    //MultiDex support
+    implementation 'androidx.multidex:multidex:2.0.0'
+
+    //ViewPager 2
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-beta02'
+
+    //Flexbox
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
+
+    //swipe to refresh
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
+
+    // Coroutines for asynchronous tasks
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+
+
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+
+}
+
+
+// Helper functions
+def getProps(String propName) {
+    def propsFile = rootProject.file('local.properties')
+    if (propsFile.exists()) {
+        def props = new Properties()
+        props.load(new FileInputStream(propsFile))
+        return props[propName]
+    } else {
+        return NullPointerException
+    }
+}

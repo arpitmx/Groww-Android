@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/rounded_corner_background"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp"
+    android:layout_marginEnd="5dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_marginStart="5dp"
+    android:paddingHorizontal="25dp"
+    android:paddingVertical="25dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_stock_icon"
+            android:layout_width="52dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="8dp"
+            app:civ_border_color="@color/better_white"
+            app:civ_border_width="1dp"
+            android:src="@drawable/placeholder_image" />
+
+
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/tv_company_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/sf_pro_display_semibold"
+        android:textColor="@android:color/black"
+        android:textAlignment="textStart"
+        tools:text="Alphabet Inc. - Class A Shares(GOOGL)" />
+
+
+    <TextView
+        android:id="@+id/tv_stock_volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/sf_pro_display_medium"
+        android:textColor="@color/textH3"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:text="Trade Volume :  4220k" />
+
+    <TextView
+        android:id="@+id/tv_stock_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/sf_pro_display_semibold"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="$000.00" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/tv_price_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_pro_display_medium"
+            android:textColor="@color/itemPrimary"
+            android:textSize="16sp"
+            tools:text="+0.00%" />
+
+        <ImageView
+            android:id="@+id/trend_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:scaleX="1.6"
+            android:scaleY="1.6"
+            android:rotation="360"
+            android:src="@drawable/baseline_arrow_drop_up_24"
+            app:tint="@color/itemPrimary"
+            />
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

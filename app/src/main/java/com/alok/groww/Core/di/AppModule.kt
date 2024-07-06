@@ -1,13 +1,14 @@
 package com.alok.groww.Core.di
 
-import android.content.Context
-import androidx.room.Room
 import com.alok.groww.Core.data.RetrofitInstance
+import com.alok.groww.Core.utils.StockRepository
+import com.alok.groww.Explore.data.repositoryImpl.StocksRepositoryImpl
 import com.alok.groww.Explore.data.source.remote.ExploreApiService
+import com.alok.groww.Explore.domain.repository.StocksRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -20,6 +21,13 @@ object AppModule {
     fun provideAlphaVantageApi(): ExploreApiService {
         return RetrofitInstance.exploreApi
     }
+
+    @Singleton
+    @Provides
+    fun provideStockRepository(): StocksRepository = StocksRepositoryImpl()
+
+
+
 
 //    @Singleton
 //    @Provides

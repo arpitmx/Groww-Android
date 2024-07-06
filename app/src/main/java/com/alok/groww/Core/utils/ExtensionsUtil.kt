@@ -333,7 +333,7 @@ object ExtensionsUtil {
                     RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL)
                 )
                 .error(
-                    R.drawable.profile_pic_placeholder)
+                    R.drawable.placeholder_image)
                 .into(this)
         }
     }

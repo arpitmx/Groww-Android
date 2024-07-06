@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <style name="TabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/TabTextAppearance</item>
+    </style>
+
+    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:fontFamily">@font/sf_pro_display_semibold</item>
+        <item name="fontWeight">800</item>
+        <item name="android:color">@color/textH2</item>
+        <item name="android:textSize">14sp</item>
+        <item name="tabTextColor">@color/textH2</item>
+    </style>
+
+</resources>

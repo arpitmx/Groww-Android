@@ -1,5 +1,6 @@
 package com.alok.groww.Core.utils
 
+import com.alok.groww.Detail.domain.models.StockDetails
 import com.alok.groww.Detail.domain.models.TimeSeries
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
@@ -67,6 +68,28 @@ object Convertors {
         val stockData = gson.fromJson(jsonString, TimeSeries::class.java)
         return stockData
     }
+
+    fun getStockDetials():StockDetails{
+        val gson = Gson()
+        val stockData = gson.fromJson(stockDetails, StockDetails::class.java)
+        return stockData
+    }
+
+
+    val stockDetails ="""{
+    "Global Quote": {
+        "01. symbol": "IBM",
+        "02. open": "175.7400",
+        "03. high": "176.0900",
+        "04. low": "173.9500",
+        "05. price": "176.0200",
+        "06. volume": "2085970",
+        "07. latest trading day": "2024-07-05",
+        "08. previous close": "175.7300",
+        "09. change": "0.2900",
+        "10. change percent": "0.1650%"
+    }
+}"""
 
     val jsonString = """{
     "Meta Data": {

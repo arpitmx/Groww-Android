@@ -1,10 +1,16 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tool="http://schemas.android.com/tools"
-    android:background="@color/white"
-    android:orientation="vertical">
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
 
     <!-- Details Screen Header and Search Button -->
     <LinearLayout
@@ -34,8 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/sf_pro_display_semibold"
-            android:text="Details"
             android:paddingStart="10dp"
+            android:text="Details"
             android:textColor="@color/textH1"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -70,22 +76,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:gravity="center"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/rounded_bg_sections"
+                android:gravity="center"
                 android:orientation="horizontal"
-                >
+                android:paddingStart="10dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="15dp">
 
                 <!-- Stock Logo -->
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/stock_logo"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/placeholder_image" />
+                <FrameLayout
+                    android:id="@+id/parent_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/cricular_background">
+
+                    <TextView
+                        android:id="@+id/tv_symbol"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        tools:text="APP"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </FrameLayout>
 
                 <!-- Stock Name and Details -->
                 <LinearLayout
@@ -93,24 +110,27 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:paddingStart="16dp">
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    >
 
                     <TextView
                         android:id="@+id/stock_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tool:text="APPLE INC"
                         android:fontFamily="@font/sf_pro_display_medium"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        tools:text="APPLE INC" />
 
                     <TextView
                         android:id="@+id/stock_symbol_and_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tool:text="AAPL, Common Stock\nNSQ"
                         android:fontFamily="@font/sf_pro_display_medium"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        tools:text="AAPL, Common Stock\nNSQ" />
                 </LinearLayout>
 
                 <!-- Stock Price and Change -->
@@ -118,26 +138,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="end"
-                    android:paddingEnd="10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingEnd="10dp">
 
                     <TextView
                         android:id="@+id/stock_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tool:text="$177.15"
                         android:fontFamily="@font/sfbold"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:paddingBottom="5dp"
+                        tools:text="$177.15" />
 
                     <TextView
                         android:id="@+id/stock_price_change"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tool:text="+0.41%"
                         android:fontFamily="@font/sf_pro_display_semibold"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        tools:text="+0.41%" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -145,21 +167,19 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:background="@drawable/rounded_bg_sections"
-                >
+                android:orientation="vertical">
                 <!-- Graph Placeholder -->
 
-               <com.robinhood.spark.SparkView
-                   android:id="@+id/graph"
-                   android:layout_width="match_parent"
-                   android:layout_height="200dp"
-                   android:padding="10dp"
-                   app:spark_animateChanges="true"
-                   app:spark_lineColor="@color/colorPrimaryDark"
-                   app:spark_scrubEnabled="true"
+                <com.robinhood.spark.SparkView
+                    android:id="@+id/graph"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:padding="10dp"
                     android:visibility="gone"
-                   />
+                    app:spark_animateChanges="true"
+                    app:spark_lineColor="@color/colorPrimaryDark"
+                    app:spark_scrubEnabled="true" />
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/graph_loading"
@@ -171,8 +191,8 @@
                     app:lottie_loop="true"
                     app:lottie_rawRes="@raw/graph_load" />
 
-                <!-- Time Range Buttons -->
                 <LinearLayout
+                    android:id="@+id/tabs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -181,14 +201,16 @@
 
 
                     <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/tab_week"
                         android:layout_width="50dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/rounded_bg_details_selected"
+                        android:background="@drawable/rounded_bg_details"
                         android:fontFamily="@font/sf_pro_display_semibold"
                         android:text="1W"
                         android:textSize="12dp" />
 
                     <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/tab_month"
                         android:layout_width="50dp"
                         android:layout_height="40dp"
                         android:background="@drawable/rounded_bg_details"
@@ -197,14 +219,16 @@
                         android:textSize="12dp" />
 
                     <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/tab_year"
                         android:layout_width="50dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/rounded_bg_details"
+                        android:background="@drawable/rounded_bg_details_selected"
                         android:fontFamily="@font/sf_pro_display_semibold"
                         android:text="1Y"
                         android:textSize="12dp" />
 
                     <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/tab_all"
                         android:layout_width="50dp"
                         android:layout_height="40dp"
                         android:background="@drawable/rounded_bg_details"
@@ -215,28 +239,27 @@
 
                 </LinearLayout>
 
+
             </androidx.appcompat.widget.LinearLayoutCompat>
-
-
 
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rounded_bg_sections"
-                >
+                android:orientation="vertical"
+                android:padding="20dp">
 
                 <!-- Stock Stats -->
                 <TextView
                     android:id="@+id/about_stock_header_fundamentals"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="8dp"
                     android:fontFamily="@font/sf_pro_display_medium"
+                    android:paddingBottom="8dp"
                     android:text="Fundamentals"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -244,88 +267,83 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
                     android:paddingBottom="8dp">
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height= "wrap_content"
-                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
                             style="@style/TextH1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:layout_weight="1"
                             android:text="52 Weeks Low" />
 
                         <TextView
                             android:id="@+id/low_52week"
+                            style="@style/TextH3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textColor="@color/colorPrimaryDark"
-                            tool:text="$123.64"
-                            style="@style/TextH3"
-                            />
+                            tools:text="$123.64" />
 
                     </LinearLayout>
 
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height= "wrap_content"
-                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
+                            style="@style/TextH1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Current Price"
-                            style="@style/TextH1"
-                            />
+                            android:textColor="@color/black"
+                            android:text="Current Price" />
 
                         <TextView
                             android:id="@+id/current_price_tv"
+                            style="@style/TextH3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textColor="@color/colorPrimaryDark"
-                            tool:text="$123.64"
-                            style="@style/TextH3"
-                            />
+                            tools:text="$123.64" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height= "wrap_content"
-                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
+                            style="@style/TextH1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="52 Weeks High"
-                            style="@style/TextH1"
-                            />
+                            android:textColor="@color/black"
+                            android:text="52 Weeks High" />
 
                         <TextView
                             android:id="@+id/high_52week"
+                            style="@style/TextH3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textColor="@color/colorPrimaryDark"
-                            tool:text="$123.64"
-                            style="@style/TextH3"
-                            />
+                            tools:text="$123.64" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -339,82 +357,76 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height= "wrap_content"
-                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
+                            style="@style/TextH1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Market Cap"
-                            style="@style/TextH1"
-                            />
+                            android:textColor="@color/black"
+                            android:text="Market Cap" />
 
                         <TextView
                             android:id="@+id/market_cap_tv"
+                            style="@style/TextH3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textColor="@color/colorPrimaryDark"
-                            tool:text="$1.2T"
-                            style="@style/TextH3"
-                            />
+                            tools:text="$1.2T" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height= "wrap_content"
-                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
+                            style="@style/TextH1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="P/E Ratio"
-                            style="@style/TextH1"
-                            />
+                            android:textColor="@color/black"
+                            android:text="P/E Ratio" />
 
                         <TextView
                             android:id="@+id/tv_pe_ratio"
+                            style="@style/TextH3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textColor="@color/colorPrimaryDark"
-                            tool:text="1.2"
-                            style="@style/TextH3"
-                            />
+                            tools:text="1.2" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height= "wrap_content"
-                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
+                            style="@style/TextH1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Beta"
-                            style="@style/TextH1"
-                            />
+                            android:textColor="@color/black"
+                            android:text="Beta" />
 
                         <TextView
                             android:id="@+id/tv_beta_value"
+                            style="@style/TextH3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textColor="@color/colorPrimaryDark"
-                            tool:text="1.02"
-                            style="@style/TextH3"
-                            />
+                            tools:text="1.02" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -428,82 +440,76 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height= "wrap_content"
-                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
+                            style="@style/TextH1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Dividend Yeild"
-                            style="@style/TextH1"
-                            />
+                            android:textColor="@color/black"
+                            android:text="Dividend Yeild" />
 
                         <TextView
                             android:id="@+id/tvDividendYield"
+                            style="@style/TextH3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textColor="@color/colorPrimaryDark"
-                            tool:text="1.02"
-                            style="@style/TextH3"
-                            />
+                            tools:text="1.02" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height= "wrap_content"
-                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
+                            style="@style/TextH1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Profit Margin"
-                            style="@style/TextH1"
-                            />
+                            android:textColor="@color/black"
+                            android:text="Profit Margin" />
 
                         <TextView
                             android:id="@+id/tvProfitMargin"
+                            style="@style/TextH3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textColor="@color/colorPrimaryDark"
-                            tool:text="$100"
-                            style="@style/TextH3"
-                            />
+                            tools:text="$100" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height= "wrap_content"
-                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
+                            style="@style/TextH1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="P/B Ratio"
-                            style="@style/TextH1"
-                            />
+                            android:textColor="@color/black"
+                            android:text="P/B Ratio" />
 
                         <TextView
                             android:id="@+id/tvPBRatio"
+                            style="@style/TextH3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textColor="@color/colorPrimaryDark"
-                            tool:text="2.05"
-                            style="@style/TextH3"
-                            />
+                            tools:text="2.05" />
 
                     </LinearLayout>
 
@@ -513,25 +519,221 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
 
+
+<!--            val AnalystRatingStrongSell: String,-->
+
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rounded_bg_sections"
-                android:padding="20dp"
-                >
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Stock Stats -->
+                <TextView
+                    android:id="@+id/analysis_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sf_pro_display_medium"
+                    android:paddingBottom="8dp"
+                    android:text="Stock Analysis"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <!-- Row 1 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/TextH1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:text="Target Price" />
+
+                        <TextView
+                            android:id="@+id/target_price"
+                            style="@style/TextH3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorPrimaryDark"
+                            tools:text="$123.64" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/TextH1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:text="Strong Buy" />
+
+                        <TextView
+                            android:id="@+id/strong_buy"
+                            style="@style/TextH3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorPrimaryDark"
+                            tools:text="$123.64" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/TextH1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:text="Rating Buy" />
+
+                        <TextView
+                            android:id="@+id/rating_buy"
+                            style="@style/TextH3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorPrimaryDark"
+                            tools:text="$123.64" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Row 2 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/TextH1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+
+                            android:text="Strong Hold" />
+
+                        <TextView
+                            android:id="@+id/strong_hold"
+                            style="@style/TextH3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorPrimaryDark"
+                            tools:text="$1.2T" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/TextH1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:text="Strong Sell" />
+
+                        <TextView
+                            android:id="@+id/strong_sell"
+                            style="@style/TextH3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorPrimaryDark"
+                            tools:text="1.2" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/TextH1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:text="Rating Sell" />
+
+                        <TextView
+                            android:id="@+id/rating_sell"
+                            style="@style/TextH3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorPrimaryDark"
+                            tools:text="1.02" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_bg_sections"
+                android:orientation="vertical"
+                android:padding="20dp">
 
                 <!-- About Stock Header -->
                 <TextView
                     android:id="@+id/about_stock_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="8dp"
                     android:fontFamily="@font/sf_pro_display_medium"
-                    tool:text="About APPLE INC"
+                    android:paddingBottom="8dp"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    tools:text="About APPLE INC" />
 
                 <!-- Industry and Sector -->
 
@@ -539,18 +741,19 @@
                     android:id="@+id/stock_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:fontFamily="@font/sf_pro_display_regular"
                     android:gravity="start"
                     android:paddingBottom="8dp"
-                    android:layout_marginTop="5dp"
-                    tool:text="International Business Machines Corporation (IBM) is an American multinational technology company headquartered in Armonk, New York, with operations in over 170 countries. The company began in 1911, founded in Endicott, New York, as the Computing-Tabulating-Recording Company (CTR) and was renamed International Business Machines in 1924. IBM is incorporated in New York. IBM produces and sells computer hardware, middleware and software, and provides hosting and consulting services in areas ranging from mainframe computers to nanotechnology. IBM is also a major research organization, holding the record for most annual U.S. patents generated by a business (as of 2020) for 28 consecutive years. Inventions by IBM include the automated teller machine (ATM), the floppy disk, the hard disk drive, the magnetic stripe card, the relational database, the SQL programming language, the UPC barcode, and dynamic random-access memory (DRAM). The IBM mainframe, exemplified by the System/360, was the dominant computing platform during the 1960s and 1970s"
-                    android:textSize="14sp" />
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:text="International Business Machines Corporation (IBM) is an American multinational technology company headquartered in Armonk, New York, with operations in over 170 countries. The company began in 1911, founded in Endicott, New York, as the Computing-Tabulating-Recording Company (CTR) and was renamed International Business Machines in 1924. IBM is incorporated in New York. IBM produces and sells computer hardware, middleware and software, and provides hosting and consulting services in areas ranging from mainframe computers to nanotechnology. IBM is also a major research organization, holding the record for most annual U.S. patents generated by a business (as of 2020) for 28 consecutive years. Inventions by IBM include the automated teller machine (ATM), the floppy disk, the hard disk drive, the magnetic stripe card, the relational database, the SQL programming language, the UPC barcode, and dynamic random-access memory (DRAM). The IBM mainframe, exemplified by the System/360, was the dominant computing platform during the 1960s and 1970s" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
                     android:paddingBottom="16dp">
 
                     <TextView
@@ -559,12 +762,12 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/rounded_bg_chips"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:padding="8dp"
                         android:fontFamily="@font/sf_pro_display_medium"
-                        tool:text="Industry: Electronic Computers"
-                        android:textSize="9dp" />
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:textColor="@color/white"
+                        android:textSize="9dp"
+                        tools:text="Industry: Electronic Computers" />
 
                     <TextView
                         android:id="@+id/sector"
@@ -573,92 +776,85 @@
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
                         android:background="@drawable/rounded_bg_chips"
-                        android:padding="6dp"
                         android:fontFamily="@font/sf_pro_display_medium"
                         android:gravity="center"
+                        android:padding="6dp"
                         android:textColor="@color/white"
-                        tool:text="Sector: Technology"
-                        android:textSize="10dp" />
+                        android:textSize="10dp"
+                        tools:text="Sector: Technology" />
                 </LinearLayout>
-
 
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-
-
         </androidx.appcompat.widget.LinearLayoutCompat>
-
 
     </ScrollView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/progress_parent"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="9"
-        android:background="#2DF8F8F8"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animation_view_error"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="136dp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/failure" />
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animation_view_loading"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="140dp"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/loadinganim" />
-
-        <TextView
-            android:id="@+id/message"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/progress_parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="172dp"
-            android:fontFamily="@font/sf_pro_display_medium"
-            android:gravity="center"
-            android:padding="20dp"
-            android:text="@string/the_stock_market_is_a_device_to_transfer_money_from_the_impatient_to_the_patient"
-            android:textSize="15dp"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            android:background="#2DF8F8F8"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_view_error"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="136dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/failure" />
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_view_loading"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="140dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loadinganim" />
 
+            <TextView
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="172dp"
+                android:fontFamily="@font/sf_pro_display_medium"
+                android:gravity="center"
+                android:padding="20dp"
+                android:text="@string/the_stock_market_is_a_device_to_transfer_money_from_the_impatient_to_the_patient"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
 
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -4,10 +4,10 @@ import com.alok.groww.Core.data.RetrofitInstance
 import com.alok.groww.Core.domain.ServerResponse
 import com.alok.groww.Core.utils.Constants
 import com.alok.groww.Core.utils.Convertors
+import com.alok.groww.Detail.domain.models.StockDetails
 import com.alok.groww.Detail.domain.models.TimeSeries
 import com.alok.groww.Explore.domain.models.StockOverviewData
 import com.alok.groww.Explore.domain.repository.StocksOverviewRepository
-import kotlinx.coroutines.Delay
 import kotlinx.coroutines.delay
 
 import retrofit2.HttpException
@@ -56,6 +56,29 @@ class StocksOverviewRepositoryImpl () : StocksOverviewRepository {
         } catch (e: Exception) {
             ServerResponse.Failure(e.message.toString())
         }
+    }
+
+    override suspend fun getStockGlobalData(symbol: String): ServerResponse<StockDetails> {
+        return try {
+            lateinit var response : Response<StockDetails>
+            if (!Constants.isTestMode){
+                response = RetrofitInstance.overviewApi.getStockDetail(symbol)
+            }else{
+                delay(1000)
+                response = Response.success(Convertors.getStockDetials())
+            }
+
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    ServerResponse.Success(it)
+                } ?: ServerResponse.Failure("No data available")
+            } else {
+                ServerResponse.Failure(HttpException(response).message())
+            }
+        } catch (e: Exception) {
+            ServerResponse.Failure(e.message.toString())
+        }
+
     }
 
 }

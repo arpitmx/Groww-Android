@@ -31,4 +31,12 @@
         <item name="android:textSize">13sp</item>
     </style>
 
+    <style name="RoundedTabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="tabBackground">@drawable/rounded_bg_details</item>
+        <item name="tabIndicator">@drawable/rounded_bg_details_selected</item>
+        <item name="android:background">@drawable/rounded_bg_details</item>
+        <item name="tabSelectedTextColor">@color/black200</item>
+        <item name="tabTextColor">@color/black200</item>
+    </style>
+
 </resources>

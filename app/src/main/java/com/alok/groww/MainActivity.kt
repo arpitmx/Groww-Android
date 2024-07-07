@@ -1,5 +1,6 @@
 package com.alok.groww
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import com.alok.groww.Explore.domain.models.StockOverviewData
 import com.alok.groww.Explore.domain.models.StocksData
 import com.alok.groww.Explore.presentation.TrendPageFragment
 import com.alok.groww.Explore.presentation.adapters.ViewPagerAdapter
+import com.alok.groww.Search.presentation.SearchActivity
 import com.alok.groww.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
@@ -43,6 +45,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+
+        binding.searchButton.setOnClickListener {
+            startActivity(Intent(this, SearchActivity::class.java))
+        }
 
         viewModel.getTrendingStockData()
         setObservers()

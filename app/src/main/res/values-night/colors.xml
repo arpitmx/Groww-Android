@@ -28,7 +28,6 @@
 
     <color name="secondary_bg_lighter">#242424</color>
     <color name="item_bg_glow">#1D2930</color>
-    <color name="better_white">#E3E1E1</color>
     <color name="card_bg">#3F4041</color>
     <color name="starts_in">#DCFFF7</color>
     <color name="prioritymax">#F30056</color>
@@ -42,13 +41,10 @@
     <color name="real_blue">#00008B</color>
     <color name="edge_bg">#00FFFFFF</color>
 
-    <color name="black">#000</color>
     <color name="bot_bubble_bg">#FFF8E1</color>
-    <color name="black200">#4A4A4A</color>
     <color name="chat_progress_bg">#8A1E71FF</color>
 
-    <color name="colorPrimary">#5DFF9D</color>
-    <color name="colorPrimaryDark">#309F5C</color>
+
     <color name="colorAccent">#ff563f</color>
     <color name="primary_txt">@color/better_white</color>
     <color name="orange">#ff563f</color>
@@ -77,20 +73,24 @@
 
 
     //Main
-
-    <color name="white">#FFFFFFFF</color>
-    <color name="primary">#F6F6F6</color>
-    <color name= "mainPrimary" >#FFFFFF</color>
-    <color name= "mainSecondary" >#F8F8F8</color>
-    <color name= "mainTertiary" >#9CCA67</color>
-    <color name= "mainTertiaryDark" >#90CC54</color>
+    <color name="black200">#EDEDED</color>
+    <color name="black">#FFFFFF</color>
+    <color name="better_white">#282828</color>
+    <color name="colorPrimary">#00FF66</color>
+    <color name="colorPrimaryDark">#51FF95</color>
+    <color name="white">#000000</color>
+    <color name="primary">#2F2F2F</color>
+    <color name= "mainPrimary" >#1A1A1A</color>
+    <color name= "mainSecondary" >#252525</color>
+    <color name= "mainTertiary" >#64FF58</color>
+    <color name= "mainTertiaryDark" >#8FFF1F</color>
     <color name= "mainTertiaryGrow" >#ABDE70</color>
     <color name= "mainTertiaryLoss" >#DE707D</color>
     <color name= "itemPrimary" >#9CCA67</color>
-    <color name= "textH1" >#272727</color>
-    <color name= "textH2" >#373737</color>
-    <color name= "textH3" >#4D4D4D</color>
-    <color name="border_section">#ECECEC</color>
+    <color name= "textH1" >#FFFFFF</color>
+    <color name= "textH2" >#ECECEC</color>
+    <color name= "textH3" >#E1E1E1</color>
+    <color name="border_section">#6B9E9E9E</color>
 
 
 </resources>

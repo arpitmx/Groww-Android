@@ -3,6 +3,8 @@ package com.alok.groww.Core.data
 import com.alok.groww.BuildConfig
 import com.alok.groww.Explore.data.source.remote.ExploreApiService
 import com.alok.groww.Explore.data.source.remote.OverviewApiService
+import com.alok.groww.Explore.data.source.remote.SearchApiService
+import com.alok.groww.Search.domain.models.SearchResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -37,5 +39,14 @@ object RetrofitInstance {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(OverviewApiService::class.java)
+    }
+
+    val searchApi: SearchApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BuildConfig.BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(SearchApiService::class.java)
     }
 }

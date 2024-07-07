@@ -2,15 +2,25 @@ package com.alok.groww.Core.utils
 
 import com.alok.groww.Explore.domain.models.StockOverviewData
 import com.alok.groww.Explore.domain.models.StocksData
+import com.alok.groww.Search.domain.models.SearchItem
+import com.alok.groww.Search.domain.models.SearchResponse
 import com.google.gson.Gson
 
 object Constants {
 
-    const val isTestMode :Boolean = true
+    const val isTestMode :Boolean = false
     object Raw{
         const val GAINER = 1
         const val LOSER = 2
         const val MOST_TRADED = 3
+        const val PASSED_FROM_SEARCH = "PASSED_FROM_SEARCH"
+
+    }
+
+    object Stock{
+        const val TYPE_EQUITY = "Equity"
+        const val TYPE_INDEX = "Index"
+        const val TYPE_ETF = "ETF"
     }
 
 
@@ -24,11 +34,78 @@ object Constants {
         const val BUNDLE_STOCK_DATA = "STOCK_DATA"
     }
 
+    object SearchTest {
+        fun getSearchData(): SearchResponse {
+            val testResponse = """{
+    "bestMatches": [
+        {
+            "1. symbol": "TSCO.LON",
+            "2. name": "Tesco PLC",
+            "3. type": "Equity",
+            "4. region": "United Kingdom",
+            "5. marketOpen": "08:00",
+            "6. marketClose": "16:30",
+            "7. timezone": "UTC+01",
+            "8. currency": "GBX",
+            "9. matchScore": "0.7273"
+        },
+        {
+            "1. symbol": "TSCDF",
+            "2. name": "Tesco plc",
+            "3. type": "Equity",
+            "4. region": "United States",
+            "5. marketOpen": "09:30",
+            "6. marketClose": "16:00",
+            "7. timezone": "UTC-04",
+            "8. currency": "USD",
+            "9. matchScore": "0.7143"
+        },
+        {
+            "1. symbol": "TSCDY",
+            "2. name": "Tesco plc",
+            "3. type": "Equity",
+            "4. region": "United States",
+            "5. marketOpen": "09:30",
+            "6. marketClose": "16:00",
+            "7. timezone": "UTC-04",
+            "8. currency": "USD",
+            "9. matchScore": "0.7143"
+        },
+        {
+            "1. symbol": "TCO2.FRK",
+            "2. name": "TESCO PLC ADR/1 LS-05",
+            "3. type": "Equity",
+            "4. region": "Frankfurt",
+            "5. marketOpen": "08:00",
+            "6. marketClose": "20:00",
+            "7. timezone": "UTC+02",
+            "8. currency": "EUR",
+            "9. matchScore": "0.5455"
+        },
+        {
+            "1. symbol": "TCO0.FRK",
+            "2. name": "TESCO PLC LS-0633333",
+            "3. type": "Equity",
+            "4. region": "Frankfurt",
+            "5. marketOpen": "08:00",
+            "6. marketClose": "20:00",
+            "7. timezone": "UTC+02",
+            "8. currency": "EUR",
+            "9. matchScore": "0.5455"
+        }
+    ]
+}"""
 
-    object OverviewTest{
+            val gson = Gson()
+            val stocksData = gson.fromJson(testResponse, SearchResponse::class.java)
+            return stocksData
+        }
+    }
 
-        fun getOverviewData():StockOverviewData{
-            val testResponse = """
+        object OverviewTest {
+
+            fun getOverviewData(): StockOverviewData {
+                val testResponse = """
                 {
                     "Symbol": "IBM",
                     "AssetType": "Common Stock",
@@ -84,17 +161,17 @@ object Constants {
                 }
             """.trimIndent()
 
-            val gson = Gson()
-            val stocksData = gson.fromJson(testResponse, StockOverviewData::class.java)
-            return stocksData
+                val gson = Gson()
+                val stocksData = gson.fromJson(testResponse, StockOverviewData::class.java)
+                return stocksData
 
+            }
         }
-    }
 
-    object TrendTest{
+        object TrendTest {
 
-        fun getTrendData():StocksData{
-            val testResponse = """{
+            fun getTrendData(): StocksData {
+                val testResponse = """{
     "metadata": "Top gainers, losers, and most actively traded US tickers",
     "last_updated": "2024-07-05 16:15:59 US/Eastern",
     "top_gainers": [
@@ -525,12 +602,12 @@ object Constants {
     ]
 }"""
 
-            val gson = Gson()
-            val stocksData = gson.fromJson(testResponse, StocksData::class.java)
+                val gson = Gson()
+                val stocksData = gson.fromJson(testResponse, StocksData::class.java)
 
-            return stocksData
+                return stocksData
+            }
+
         }
-
     }
 
-}

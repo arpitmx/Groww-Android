@@ -1,8 +1,11 @@
 package com.alok.groww.Explore.presentation.adapters
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.alok.groww.Core.utils.Constants
@@ -12,6 +15,8 @@ import com.alok.groww.Explore.domain.models.Stock
 import com.alok.groww.R
 import com.alok.groww.databinding.StockItemBinding
 import timber.log.Timber
+import java.util.Locale
+import java.util.Random
 
 class TrendAdapter(val stockList: MutableList<Stock>, val trendType: Int, val context: Context, val listener : OnItemClickListener) : RecyclerView.Adapter<TrendAdapter.StockViewHolder>() {
 
@@ -84,11 +89,32 @@ class TrendAdapter(val stockList: MutableList<Stock>, val trendType: Int, val co
             }else{
                 binding.tvStockVolume.gone()
             }
+
+            setupCircularSymbolView(binding.parentIcon, stock.ticker, binding.tvSymbol)
             setGrowthUi(binding,getTrendType(stock.change_percentage))
         }
+    }
+
+
+    fun setupCircularSymbolView(view: FrameLayout, symbol: String, tv : TextView) {
+
+        // Set the text to the first two letters of the symbol
+        tv.text = symbol.take(2).uppercase(Locale.getDefault())
+
+        // Generate a random color
+        val randomColor = generateRandomColor()
+        view.background.setTint(randomColor)
+    }
+
+    private fun generateRandomColor(): Int {
+        val rnd = Random()
+        return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
     }
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
     }
+
+
+
 }

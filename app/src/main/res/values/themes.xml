@@ -9,4 +9,11 @@
     </style>
 
 
+    <style name="progressBarPrimary" parent="@style/Theme.AppCompat">
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="android:indeterminateTint">@color/colorPrimaryDark</item>
+    </style>
+
+
+
 </resources>

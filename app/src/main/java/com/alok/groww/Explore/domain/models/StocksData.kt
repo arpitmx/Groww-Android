@@ -1,8 +1,9 @@
 package com.alok.groww.Explore.domain.models
 
-import kotlinx.serialization.Serializable
+import androidx.room.Entity
 
-@Serializable
+
+
 data class StocksData(
     val Information: String?,
     val metadata: String,

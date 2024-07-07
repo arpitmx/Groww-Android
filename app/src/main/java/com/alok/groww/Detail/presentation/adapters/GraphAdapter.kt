@@ -2,7 +2,15 @@ package com.alok.groww.Detail.presentation.adapters
 
 import com.robinhood.spark.SparkAdapter
 
-class GraphAdapter(val ydata: List<Float>) : SparkAdapter() {
+class GraphAdapter(var ydata: MutableList<Float>) : SparkAdapter() {
+
+
+    fun updateYData(newData: List<Float>) {
+        ydata.clear()
+        ydata.addAll(newData)
+        notifyDataSetChanged()
+    }
+
 
     override fun getCount(): Int {
        return ydata.size

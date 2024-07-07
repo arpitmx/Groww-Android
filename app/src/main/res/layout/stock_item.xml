@@ -11,6 +11,7 @@
     android:layout_marginEnd="5dp"
     android:clickable="true"
     android:focusable="true"
+    android:foreground="@drawable/ripplecustom"
     android:layout_marginStart="5dp"
     android:paddingHorizontal="25dp"
     android:paddingVertical="25dp">
@@ -22,14 +23,22 @@
         android:orientation="horizontal"
         >
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_stock_icon"
-            android:layout_width="52dp"
-            android:layout_height="55dp"
-            android:layout_marginEnd="8dp"
-            app:civ_border_color="@color/better_white"
-            app:civ_border_width="1dp"
-            android:src="@drawable/placeholder_image" />
+        <FrameLayout
+            android:id="@+id/parent_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/cricular_background">
+
+            <TextView
+                android:id="@+id/tv_symbol"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                tools:text="APP"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </FrameLayout>
 
 
     </LinearLayout>
@@ -43,7 +52,7 @@
         android:textSize="16sp"
         android:layout_marginTop="15dp"
         android:fontFamily="@font/sf_pro_display_semibold"
-        android:textColor="@android:color/black"
+        android:textColor="@color/black"
         android:textAlignment="textStart"
         tools:text="Alphabet Inc. - Class A Shares(GOOGL)" />
 
@@ -65,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/sf_pro_display_semibold"
-        android:textColor="@android:color/black"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         tools:text="$000.00" />

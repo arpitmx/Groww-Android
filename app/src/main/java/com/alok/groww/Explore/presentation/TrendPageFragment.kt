@@ -19,12 +19,27 @@ import com.alok.groww.Explore.presentation.adapters.TrendAdapter
 import com.alok.groww.Explore.presentation.viewmodels.TrendPageViewModel
 import com.alok.groww.databinding.FragmentTrendBinding
 import com.google.gson.Gson
+import kotlinx.serialization.json.Json
+import java.util.ArrayList
 
-class TrendPageFragment(val stocks : List<Stock>, val type: Int): Fragment(), TrendAdapter.OnItemClickListener {
+class TrendPageFragment(): Fragment(), TrendAdapter.OnItemClickListener {
 
+    private var stocks: List<Stock>? = null
+    private var type: Int = 0
 
     companion object {
-        fun newInstance(stocks: List<Stock>, type: Int) = TrendPageFragment(stocks, type)
+
+        private const val ARG_STOCKS = "stocks"
+        private const val ARG_TYPE = "type"
+
+        fun newInstance(stocks: List<Stock>, type: Int): TrendPageFragment {
+            val fragment = TrendPageFragment()
+            val args = Bundle()
+            args.putParcelableArrayList(ARG_STOCKS, ArrayList(stocks))  // Assuming Stock implements Parcelable
+            args.putInt(ARG_TYPE, type)
+            fragment.arguments = args
+            return fragment
+        }
 
     }
 
@@ -32,7 +47,12 @@ class TrendPageFragment(val stocks : List<Stock>, val type: Int): Fragment(), Tr
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.list = stocks
+        arguments?.let {
+            stocks = it.getParcelableArrayList(ARG_STOCKS)
+            type = it.getInt(ARG_TYPE)
+        }
+
+        viewModel.list = stocks!!
     }
 
     private lateinit var binding : FragmentTrendBinding
@@ -84,7 +104,7 @@ class TrendPageFragment(val stocks : List<Stock>, val type: Int): Fragment(), Tr
     override fun onItemClick(position: Int) {
         val bundle = Bundle().apply {
             val gson = Gson()
-            val jsonStock = gson.toJson(stocks[position])
+            val jsonStock = gson.toJson(stocks!![position])
             putString(Constants.Keys.BUNDLE_STOCK_DATA, jsonStock)
         }
 

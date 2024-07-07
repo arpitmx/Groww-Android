@@ -5,6 +5,7 @@ import com.alok.groww.Core.domain.ServerResponse
 import com.alok.groww.Core.utils.Constants
 import com.alok.groww.Explore.domain.models.StocksData
 import com.alok.groww.Explore.domain.repository.StocksRepository
+import kotlinx.coroutines.delay
 import retrofit2.HttpException
 import retrofit2.Response
 
@@ -15,6 +16,7 @@ class StocksRepositoryImpl () : StocksRepository {
                 if (!Constants.isTestMode){
                     response = RetrofitInstance.exploreApi.getTopGainersLosers()
                 }else{
+                    delay(2000)
                     response = Response.success(Constants.TrendTest.getTrendData())
                 }
 

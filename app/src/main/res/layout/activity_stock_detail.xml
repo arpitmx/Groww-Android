@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/mainPrimary"
-    tools:context=".Detail.presentation.StockDetailActivity">
+    xmlns:tool="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <!-- ActionBar -->
-
+    <!-- Details Screen Header and Search Button -->
     <LinearLayout
         android:id="@+id/actionBar"
         android:layout_width="match_parent"
@@ -50,6 +48,551 @@
             app:tint="@color/textH1" />
     </LinearLayout>
 
+    <ScrollView
+        android:id="@+id/parent_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="always"
+        android:scrollbars="none"
+        android:visibility="visible"
+
+        >
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <!-- Stock Information -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_bg_sections"
+                android:orientation="horizontal"
+                >
+
+                <!-- Stock Logo -->
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/stock_logo"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/placeholder_image" />
+
+                <!-- Stock Name and Details -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingStart="16dp">
+
+                    <TextView
+                        android:id="@+id/stock_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tool:text="APPLE INC"
+                        android:fontFamily="@font/sf_pro_display_medium"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/stock_symbol_and_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tool:text="AAPL, Common Stock\nNSQ"
+                        android:fontFamily="@font/sf_pro_display_medium"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- Stock Price and Change -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:paddingEnd="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/stock_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tool:text="$177.15"
+                        android:fontFamily="@font/sfbold"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/stock_price_change"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tool:text="+0.41%"
+                        android:fontFamily="@font/sf_pro_display_semibold"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_bg_sections"
+                >
+                <!-- Graph Placeholder -->
+
+               <com.robinhood.spark.SparkView
+                   android:id="@+id/graph"
+                   android:layout_width="match_parent"
+                   android:layout_height="200dp"
+                   android:padding="10dp"
+                   app:spark_animateChanges="true"
+                   app:spark_lineColor="@color/colorPrimaryDark"
+                   app:spark_scrubEnabled="true"
+                    android:visibility="gone"
+                   />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/graph_loading"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:visibility="visible"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/graph_load" />
+
+                <!-- Time Range Buttons -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/rounded_bg_details_selected"
+                        android:fontFamily="@font/sf_pro_display_semibold"
+                        android:text="1W"
+                        android:textSize="12dp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/rounded_bg_details"
+                        android:fontFamily="@font/sf_pro_display_semibold"
+                        android:text="1M"
+                        android:textSize="12dp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/rounded_bg_details"
+                        android:fontFamily="@font/sf_pro_display_semibold"
+                        android:text="1Y"
+                        android:textSize="12dp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/rounded_bg_details"
+                        android:fontFamily="@font/sf_pro_display_semibold"
+                        android:text="All"
+                        android:textSize="12dp" />
+
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_bg_sections"
+                >
+
+                <!-- Stock Stats -->
+                <TextView
+                    android:id="@+id/about_stock_header_fundamentals"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:fontFamily="@font/sf_pro_display_medium"
+                    android:text="Fundamentals"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <!-- Row 1 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:paddingBottom="8dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height= "wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        >
+
+                        <TextView
+                            style="@style/TextH1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="52 Weeks Low" />
+
+                        <TextView
+                            android:id="@+id/low_52week"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorPrimaryDark"
+                            tool:text="$123.64"
+                            style="@style/TextH3"
+                            />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height= "wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Current Price"
+                            style="@style/TextH1"
+                            />
+
+                        <TextView
+                            android:id="@+id/current_price_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorPrimaryDark"
+                            tool:text="$123.64"
+                            style="@style/TextH3"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height= "wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="52 Weeks High"
+                            style="@style/TextH1"
+                            />
+
+                        <TextView
+                            android:id="@+id/high_52week"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorPrimaryDark"
+                            tool:text="$123.64"
+                            style="@style/TextH3"
+                            />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Row 2 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height= "wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Market Cap"
+                            style="@style/TextH1"
+                            />
+
+                        <TextView
+                            android:id="@+id/market_cap_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorPrimaryDark"
+                            tool:text="$1.2T"
+                            style="@style/TextH3"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height= "wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="P/E Ratio"
+                            style="@style/TextH1"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_pe_ratio"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorPrimaryDark"
+                            tool:text="1.2"
+                            style="@style/TextH3"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height= "wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Beta"
+                            style="@style/TextH1"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_beta_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorPrimaryDark"
+                            tool:text="1.02"
+                            style="@style/TextH3"
+                            />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Row 3 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height= "wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Dividend Yeild"
+                            style="@style/TextH1"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvDividendYield"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorPrimaryDark"
+                            tool:text="1.02"
+                            style="@style/TextH3"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height= "wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Profit Margin"
+                            style="@style/TextH1"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvProfitMargin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorPrimaryDark"
+                            tool:text="$100"
+                            style="@style/TextH3"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height= "wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="P/B Ratio"
+                            style="@style/TextH1"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvPBRatio"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorPrimaryDark"
+                            tool:text="2.05"
+                            style="@style/TextH3"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_bg_sections"
+                android:padding="20dp"
+                >
+
+                <!-- About Stock Header -->
+                <TextView
+                    android:id="@+id/about_stock_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:fontFamily="@font/sf_pro_display_medium"
+                    tool:text="About APPLE INC"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <!-- Industry and Sector -->
+
+                <TextView
+                    android:id="@+id/stock_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sf_pro_display_regular"
+                    android:gravity="start"
+                    android:paddingBottom="8dp"
+                    android:layout_marginTop="5dp"
+                    tool:text="International Business Machines Corporation (IBM) is an American multinational technology company headquartered in Armonk, New York, with operations in over 170 countries. The company began in 1911, founded in Endicott, New York, as the Computing-Tabulating-Recording Company (CTR) and was renamed International Business Machines in 1924. IBM is incorporated in New York. IBM produces and sells computer hardware, middleware and software, and provides hosting and consulting services in areas ranging from mainframe computers to nanotechnology. IBM is also a major research organization, holding the record for most annual U.S. patents generated by a business (as of 2020) for 28 consecutive years. Inventions by IBM include the automated teller machine (ATM), the floppy disk, the hard disk drive, the magnetic stripe card, the relational database, the SQL programming language, the UPC barcode, and dynamic random-access memory (DRAM). The IBM mainframe, exemplified by the System/360, was the dominant computing platform during the 1960s and 1970s"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:paddingBottom="16dp">
+
+                    <TextView
+                        android:id="@+id/industry"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_bg_chips"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:padding="8dp"
+                        android:fontFamily="@font/sf_pro_display_medium"
+                        tool:text="Industry: Electronic Computers"
+                        android:textSize="9dp" />
+
+                    <TextView
+                        android:id="@+id/sector"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_bg_chips"
+                        android:padding="6dp"
+                        android:fontFamily="@font/sf_pro_display_medium"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        tool:text="Sector: Technology"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </ScrollView>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/progress_parent"
         android:layout_width="match_parent"
@@ -68,7 +611,7 @@
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_gravity="center"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="136dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
@@ -83,14 +626,14 @@
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_gravity="center"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="140dp"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
-            app:lottie_loop="false"
+            app:lottie_loop="true"
             app:lottie_rawRes="@raw/loadinganim" />
 
         <TextView
@@ -99,7 +642,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:layout_marginBottom="168dp"
+            android:layout_marginBottom="172dp"
             android:fontFamily="@font/sf_pro_display_medium"
             android:gravity="center"
             android:padding="20dp"
@@ -113,22 +656,9 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/layout_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="visible"
-        android:background="@color/mainPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

@@ -1,5 +1,6 @@
 package com.alok.groww.Explore.data.repositoryImpl
 
+import com.alok.groww.Core.data.RetrofitInstance
 import com.alok.groww.Core.domain.ServerResponse
 import com.alok.groww.Core.utils.Constants
 import com.alok.groww.Explore.domain.models.StocksData
@@ -10,8 +11,13 @@ import retrofit2.Response
 class StocksRepositoryImpl () : StocksRepository {
         override suspend fun getTopStocksData(): ServerResponse<StocksData> {
             return try {
-                //val response = RetrofitInstance.exploreApi.getTopGainersLosers()
-                val response : Response<StocksData> = Response.success(Constants.TrendTest.getTrendData())
+                lateinit var response : Response<StocksData>
+                if (!Constants.isTestMode){
+                    response = RetrofitInstance.exploreApi.getTopGainersLosers()
+                }else{
+                    response = Response.success(Constants.TrendTest.getTrendData())
+                }
+
                 if (response.isSuccessful) {
                     response.body()?.let {
                         ServerResponse.Success(it)

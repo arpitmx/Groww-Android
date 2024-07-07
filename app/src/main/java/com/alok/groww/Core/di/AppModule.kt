@@ -2,8 +2,11 @@ package com.alok.groww.Core.di
 
 import com.alok.groww.Core.data.RetrofitInstance
 import com.alok.groww.Core.utils.StockRepository
+import com.alok.groww.Explore.data.repositoryImpl.StocksOverviewRepositoryImpl
 import com.alok.groww.Explore.data.repositoryImpl.StocksRepositoryImpl
 import com.alok.groww.Explore.data.source.remote.ExploreApiService
+import com.alok.groww.Explore.domain.models.StockOverviewData
+import com.alok.groww.Explore.domain.repository.StocksOverviewRepository
 import com.alok.groww.Explore.domain.repository.StocksRepository
 import dagger.Binds
 import dagger.Module
@@ -26,7 +29,9 @@ object AppModule {
     @Provides
     fun provideStockRepository(): StocksRepository = StocksRepositoryImpl()
 
-
+    @Singleton
+    @Provides
+    fun provideStockOverviewRepository(): StocksOverviewRepository = StocksOverviewRepositoryImpl()
 
 
 //    @Singleton

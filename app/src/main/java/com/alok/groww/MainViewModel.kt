@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alok.groww.Core.domain.ServerResponse
+import com.alok.groww.Explore.domain.models.StockOverviewData
 import com.alok.groww.Explore.domain.models.StocksData
 import com.alok.groww.Explore.domain.repository.StocksRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/sf_pro_display_medium"
-            android:textColor="@color/itemPrimary"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp"
             tools:text="+0.00%" />
 
@@ -95,7 +95,7 @@
             android:scaleY="1.6"
             android:rotation="360"
             android:src="@drawable/baseline_arrow_drop_up_24"
-            app:tint="@color/itemPrimary"
+            app:tint="@color/colorPrimaryDark"
             />
 
 

@@ -15,4 +15,20 @@
         <item name="tabTextColor">@color/textH2</item>
     </style>
 
+    <style name="TextH1" >
+        <item name="textAllCaps">false</item>
+        <item name="android:fontFamily">@font/sf_pro_display_semibold</item>
+        <item name="fontWeight">800</item>
+        <item name="android:color">@color/textH1</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextH3" >
+        <item name="textAllCaps">false</item>
+        <item name="android:fontFamily">@font/sf_pro_display_medium</item>
+        <item name="fontWeight">600</item>
+        <item name="android:color">@color/textH2</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
 </resources>

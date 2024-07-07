@@ -1,20 +1,13 @@
 package com.alok.groww
 
-import android.graphics.drawable.Drawable
-import com.alok.groww.R
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.alok.groww.Core.domain.ServerResponse
 import com.alok.groww.Core.utils.DepthPageTransformer
 import com.alok.groww.Core.utils.ExtensionsUtil.gone
-import com.alok.groww.Core.utils.ExtensionsUtil.toast
 import com.alok.groww.Core.utils.ExtensionsUtil.visible
-import com.alok.groww.Explore.domain.models.Stock
+import com.alok.groww.Explore.domain.models.StockOverviewData
 import com.alok.groww.Explore.domain.models.StocksData
 import com.alok.groww.Explore.presentation.TrendPageFragment
 import com.alok.groww.Explore.presentation.adapters.ViewPagerAdapter
@@ -39,8 +32,6 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel : MainViewModel by viewModels()
     private lateinit var viewPagerAdapter: ViewPagerAdapter
-    lateinit var gainersFragment : TrendPageFragment
-    lateinit var losersFragment: TrendPageFragment
 
 
     private val tabIcons = intArrayOf(
@@ -55,8 +46,6 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getTrendingStockData()
         setObservers()
-
-
     }
 
     private fun setObservers() {
@@ -76,7 +65,9 @@ class MainActivity : AppCompatActivity() {
                     is ServerResponse.Success -> {
                         setLoader(0)
                         if (isvalidData(response.data)) {
-                            setupViews(response.data)
+
+                            viewModel.stocksData = response.data
+                            setupViews(viewModel.stocksData)
                         }
                     }
                 }

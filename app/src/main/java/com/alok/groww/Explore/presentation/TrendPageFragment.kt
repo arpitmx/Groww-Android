@@ -9,19 +9,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alok.groww.Core.utils.Constants
 import com.alok.groww.Core.utils.ExtensionsUtil.gone
-import com.alok.groww.Core.utils.ExtensionsUtil.toast
 import com.alok.groww.Core.utils.ExtensionsUtil.visible
 import com.alok.groww.Detail.presentation.StockDetailActivity
 import com.alok.groww.Explore.domain.models.Stock
 import com.alok.groww.Explore.presentation.adapters.TrendAdapter
 import com.alok.groww.Explore.presentation.viewmodels.TrendPageViewModel
-import com.alok.groww.MainActivity
-import com.alok.groww.R
 import com.alok.groww.databinding.FragmentTrendBinding
+import com.google.gson.Gson
 
 class TrendPageFragment(val stocks : List<Stock>, val type: Int): Fragment(), TrendAdapter.OnItemClickListener {
 
@@ -35,7 +32,7 @@ class TrendPageFragment(val stocks : List<Stock>, val type: Int): Fragment(), Tr
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        viewModel.list = stocks
     }
 
     private lateinit var binding : FragmentTrendBinding
@@ -59,7 +56,7 @@ class TrendPageFragment(val stocks : List<Stock>, val type: Int): Fragment(), Tr
     lateinit var adapter: TrendAdapter
     private fun setupViews() {
 
-        adapter = TrendAdapter(stocks.toMutableList(),type,requireContext(), this)
+        adapter = TrendAdapter(viewModel.list.toMutableList(),type,requireContext(), this)
         binding.trendRV.layoutManager = GridLayoutManager(context,2)
         binding.trendRV.setHasFixedSize(true)
         binding.trendRV.adapter = adapter
@@ -86,7 +83,9 @@ class TrendPageFragment(val stocks : List<Stock>, val type: Int): Fragment(), Tr
 
     override fun onItemClick(position: Int) {
         val bundle = Bundle().apply {
-            putString(Constants.Keys.BUNDLE_SYMBOL_KEY, stocks[position].ticker)
+            val gson = Gson()
+            val jsonStock = gson.toJson(stocks[position])
+            putString(Constants.Keys.BUNDLE_STOCK_DATA, jsonStock)
         }
 
         val intent = Intent(activity, StockDetailActivity::class.java)

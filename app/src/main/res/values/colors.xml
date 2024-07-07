@@ -81,10 +81,11 @@
 
     <color name= "mainPrimary" >#FFFFFF</color>
     <color name= "mainSecondary" >#F8F8F8</color>
-    <color name= "mainTertiary" >#ABDE70</color>
+    <color name= "mainTertiary" >#9CCA67</color>
+    <color name= "mainTertiaryDark" >#90CC54</color>
     <color name= "mainTertiaryGrow" >#ABDE70</color>
     <color name= "mainTertiaryLoss" >#DE707D</color>
-    <color name= "itemPrimary" >#9BC866</color>
+    <color name= "itemPrimary" >#9CCA67</color>
     <color name= "textH1" >#272727</color>
     <color name= "textH2" >#373737</color>
     <color name= "textH3" >#4D4D4D</color>

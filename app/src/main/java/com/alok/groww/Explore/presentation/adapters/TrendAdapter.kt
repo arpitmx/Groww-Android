@@ -52,8 +52,8 @@ class TrendAdapter(val stockList: MutableList<Stock>, val trendType: Int, val co
     private fun setGrowthUi(binding : StockItemBinding, trendTypex: Int){
         if (trendTypex == GAINER){
             binding.trendIcon.rotation =0f
-            binding.trendIcon.setColorFilter(ContextCompat.getColor(context, R.color.mainTertiaryGrow))
-            binding.tvPriceChange.setTextColor(ContextCompat.getColor(context, R.color.mainTertiaryGrow))
+            binding.trendIcon.setColorFilter(ContextCompat.getColor(context, R.color.colorPrimaryDark))
+            binding.tvPriceChange.setTextColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
         }else if (trendTypex == LOSER){
             binding.trendIcon.rotation = 180f
             binding.trendIcon.setColorFilter(ContextCompat.getColor(context, R.color.mainTertiaryLoss))
